@@ -6,23 +6,22 @@ Form: !Form
     margins: 10x0x10x10
 
 Grid_Template: !Template:LinkGrid
-    - !ACenter
-        - !AStretch:Grid
-            margins: 10x10x10x10
-            repeat-over: "{TAB}"
-            padding: 10
-            horizontal: True
-            aspect-ratio: 1.25
-            
-            children:
-                - !RelatedDisplay
-                    geometry: 200x40
-                    background: *menu_green
-                    foreground: *white
-                    font: -DejaVu Sans Mono -Bold -9
-                    text:  "{title:^20s}"
-                    links: "{links}"
-    
+    - !ACenter:AStretch:Grid
+        margins: 10x10x10x10
+        repeat-over: "{TAB}"
+        padding: 10
+        horizontal: True
+        aspect-ratio: 1.25
+        
+        children:
+            - !RelatedDisplay
+                geometry: 200x40
+                background: *menu_green
+                foreground: *white
+                font: -DejaVu Sans Mono -Bold -9
+                text:  "{title:^20s}"
+                links: "{links}"
+
 Links: !TabbedGroup
     foreground: *white
     tab-color: $003584
