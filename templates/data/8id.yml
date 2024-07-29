@@ -69,7 +69,7 @@ Hutches:
     #   links - List of displays to link to
     #   link-color - Hex-code color for related display button (try to match with image)
     # 
-    #   Maximum of 8 entries per hutch.
+    #   Default 410px width equates to 8 entries in a hutch
 
         - name:  "WBeam"
           name2: "Slits"
@@ -135,7 +135,7 @@ Hutches:
     #   title - Display title for button (max chars 15)
     #   links - List of displays to link to
     # 
-    #   Maximum of six buttons per hutch
+    #   Default width of 410px equates to six buttons per hutch
 
         - title: "Motors"
           links:
@@ -234,7 +234,7 @@ Hutches:
     #   links - List of displays to link to
     #   link-color - Hex-code color for related display button (try to match with image)
     # 
-    #   Maximum of 8 entries per hutch.
+    #   Default 410px width equates to 8 entries in a hutch
         
         - name: "Flag 4"
           image: "../img/flag.gif"
@@ -285,7 +285,7 @@ Hutches:
     #   title - Display title for button (max chars 15)
     #   links - List of displays to link to
     # 
-    #   Maximum of six buttons per hutch
+    #   Default width of 410px equates to six buttons per hutch
             
         - title: "Motors"
           links:
@@ -370,7 +370,7 @@ Hutches:
     #   links - List of displays to link to
     #   link-color - Hex-code color for related display button (try to match with image)
     # 
-    #   Maximum of 8 entries per hutch.
+    #   Default 410px width equates to 8 entries in a hutch
         
         - name: "Shutter"
           image: "../img/shutter.gif"
@@ -440,7 +440,7 @@ Hutches:
     #   title - Display title for button (max chars 15)
     #   links - List of displays to link to
     # 
-    #   Maximum of six buttons per hutch
+    #   Default width of 410px equates to six buttons per hutch
             
         - title: "Motors 1"
           links:
@@ -533,7 +533,7 @@ Hutches:
     #   links - List of displays to link to
     #   link-color - Hex-code color for related display button (try to match with image)
     # 
-    #   Maximum of 8 entries per hutch.
+    #   Default 410px width equates to 8 entries in a hutch
         
         - name: "Shutter"
           image: "../img/shutter.gif"
@@ -605,7 +605,7 @@ Hutches:
     #   title - Display title for button (max chars 15)
     #   links - List of displays to link to
     # 
-    #   Maximum of six buttons per hutch
+    #   Default width of 410px equates to six buttons per hutch
 
         - title: "Motors VME"
           links:
