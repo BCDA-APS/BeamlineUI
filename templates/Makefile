@@ -15,7 +15,7 @@ SCREENS += 8ide_all.ui
 8ide_all_INPUT = data/8ide.yml
 
 SCREENS += 8idi_all.ui
-8idi_all_TEMPLATE = hutch_extra.yml
+8idi_all_TEMPLATE = hutch.yml
 8idi_all_INPUT = data/8idi.yml
 
 SCREENS += 8id.ui

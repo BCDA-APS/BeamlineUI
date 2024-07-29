@@ -78,7 +78,7 @@ Single_Hutch: !Template:Hutch
     - !Defaults
         hutch-width: 410
         beam-shape: [ 15x100, 394x100 ]
-        IOC-links:
+        IOC-Links:
             - { label: "IOC Debug", file: "{prefix}_all.ui" }
     
     - !group
