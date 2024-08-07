@@ -76,7 +76,7 @@ OPS_readback: !Template:OPSReadback
             
 Single_Hutch: !Template:Hutch
     - !Defaults
-        hutch-width: 410
+        hutch-width: 415
         beam-shape: [ 15x100, 394x100 ]
         IOC-Links:
             - { label: "IOC Debug", file: "{prefix}_all.ui" }
@@ -216,15 +216,15 @@ Ops: !hcenter:hflow
                             
                 - !vrepeat
                     padding: 10
-                    repeat-over: [ { val: "US" }, { val: "DS" } ]
+                    repeat-over: "Undulators"
                     
                     children:
                         - !HFlow
                             padding: 10
                             children:
-                                - !Text { <<: *row_label, text: "{val}:" }
-                                - !Apply:OPSReadback { <<: *beam_rdbk, read-pv: "S{Sector:02d}{Type}:{val}{Type}:EnergyM", units: "keV" }
-                                - !Apply:OPSReadback { <<: *beam_rdbk, read-pv: "S{Sector:02d}{Type}:{val}{Type}:GapM",    units: "mm"  }
+                                - !Text { <<: *row_label, text: "{label}:" }
+                                - !Apply:OPSReadback { <<: *beam_rdbk, read-pv: "S{Sector:02d}{Type}:{label}{Type}:EnergyM", units: "keV" }
+                                - !Apply:OPSReadback { <<: *beam_rdbk, read-pv: "S{Sector:02d}{Type}:{label}{Type}:GapM",    units: "mm"  }
             
         #############
         # BPM Panel #
@@ -332,7 +332,7 @@ UITitle: !Apply:ScreenHeader
     title: "Beamline {Sector}-{Type}"
 
 Time: !HAnchor:TextMonitor
-    geometry: 0x15 x 225x24
+    geometry: 0x15 x 250x24
     alignment: Left
     foreground: *alarm_yellow
     font: "Liberation Sans -Regular -12"

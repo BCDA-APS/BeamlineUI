@@ -2,6 +2,11 @@ Sector: 8
 Sector_plus_one: 9
 Type: 'ID'
 
+# List of undulators for the beamline. 
+Undulators: 
+    - label: "US"
+    - label: "DS"
+
 # Set of related displays for each section of the top panels
 SR-links:
     - { label: "Full",           file: "mbaMain",         macros: "" }
@@ -53,7 +58,7 @@ Hutches:
       # Making a section skinnier may require fewer optics slices or related display buttons
       # Default is:
       #   
-      # hutch-width: 410
+      # hutch-width: 415
 
         
       optics:
@@ -69,7 +74,7 @@ Hutches:
     #   links - List of displays to link to
     #   link-color - Hex-code color for related display button (try to match with image)
     # 
-    #   Default 410px width equates to 8 entries in a hutch
+    #   Default 415px width equates to 8 entries in a hutch
 
         - name:  "WBeam"
           name2: "Slits"
@@ -135,7 +140,7 @@ Hutches:
     #   title - Display title for button (max chars 15)
     #   links - List of displays to link to
     # 
-    #   Default width of 410px equates to six buttons per hutch
+    #   Default width of 415px equates to six buttons per hutch
 
         - title: "Motors"
           links:
@@ -219,7 +224,7 @@ Hutches:
       # Making a section skinnier may require fewer optics slices or related display buttons
       # Default is:
       #   
-      # hutch-width: 410
+      # hutch-width: 415
         
       optics:        
 
@@ -234,7 +239,7 @@ Hutches:
     #   links - List of displays to link to
     #   link-color - Hex-code color for related display button (try to match with image)
     # 
-    #   Default 410px width equates to 8 entries in a hutch
+    #   Default 415px width equates to 8 entries in a hutch
         
         - name: "Flag 4"
           image: "../img/flag.gif"
@@ -285,7 +290,7 @@ Hutches:
     #   title - Display title for button (max chars 15)
     #   links - List of displays to link to
     # 
-    #   Default width of 410px equates to six buttons per hutch
+    #   Default width of 415px equates to six buttons per hutch
             
         - title: "Motors"
           links:
@@ -355,7 +360,7 @@ Hutches:
       # Making a section skinnier may require fewer optics slices or related display buttons
       # Default is:
       #   
-      # hutch-width: 410
+      # hutch-width: 415
         
       optics:
         
@@ -370,7 +375,7 @@ Hutches:
     #   links - List of displays to link to
     #   link-color - Hex-code color for related display button (try to match with image)
     # 
-    #   Default 410px width equates to 8 entries in a hutch
+    #   Default 415px width equates to 8 entries in a hutch
         
         - name: "Shutter"
           image: "../img/shutter.gif"
@@ -440,7 +445,7 @@ Hutches:
     #   title - Display title for button (max chars 15)
     #   links - List of displays to link to
     # 
-    #   Default width of 410px equates to six buttons per hutch
+    #   Default width of 415px equates to six buttons per hutch
             
         - title: "Motors 1"
           links:
@@ -517,7 +522,7 @@ Hutches:
       # Making a section skinnier may require fewer optics slices or related display buttons
       # Default is:
       #   
-      # hutch-width: 410
+      # hutch-width: 415
         
         
       optics:
@@ -533,7 +538,7 @@ Hutches:
     #   links - List of displays to link to
     #   link-color - Hex-code color for related display button (try to match with image)
     # 
-    #   Default 410px width equates to 8 entries in a hutch
+    #   Default 415px width equates to 8 entries in a hutch
         
         - name: "Shutter"
           image: "../img/shutter.gif"
@@ -605,7 +610,7 @@ Hutches:
     #   title - Display title for button (max chars 15)
     #   links - List of displays to link to
     # 
-    #   Default width of 410px equates to six buttons per hutch
+    #   Default width of 415px equates to six buttons per hutch
 
         - title: "Motors VME"
           links:
