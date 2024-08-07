@@ -4,8 +4,8 @@ Type: 'ID'
 
 # List of undulators for the beamline. 
 Undulators: 
-    - label: "US"
-    - label: "DS"
+    - "US"
+    - "DS"
 
 # Set of related displays for each section of the top panels
 SR-links:
@@ -36,11 +36,15 @@ Hutches:
 #########################################
 #                A Hutch                #
 #########################################
-    
+
+#   ID      - Label to identify hutch, will display as {Sector}-{Type}-{ID}
+#   prefix  - IOC Prefix, can be used in related-display macros 
+#   shutter - BLEPS shutter initialism
+
     - ID: 'A'
       prefix: "8ida"
       shutter: "FES"
-        
+       
       # Related displays that will be linked in IOC name button (OPTIONAL)
       # Default is:
       # 
@@ -53,6 +57,11 @@ Hutches:
       # 
       # beam-shape: [ 0x100, 380x100 ]
       beam-shape: [ 15x100, 325x100, 333x80, 395x80 ]
+
+      # PSS station ID for displayed beam (OPTIONAL)
+      # Default is:
+      # 
+      # beam-station: "{ID}"
         
       # Width, in pixels, of the hutch's section. (OPTIONAL)
       # Making a section skinnier may require fewer optics slices or related display buttons
@@ -203,7 +212,11 @@ Hutches:
 #########################################
 #                D Hutch                #
 #########################################
-            
+
+#   ID      - Label to identify hutch, will display as {Sector}-{Type}-{ID}
+#   prefix  - IOC Prefix, can be used in related-display macros 
+#   shutter - BLEPS shutter initialism
+
     - ID: 'D'
       prefix: "8idd"
       shutter: "SDS"
@@ -219,6 +232,11 @@ Hutches:
       # Default is:
       # 
       # beam-shape: [ 0x100, 380x100 ]
+        
+      # PSS station ID for displayed beam (OPTIONAL)
+      # Default is:
+      # 
+      # beam-station: "{ID}"
         
       # Width, in pixels, of the hutch's section. (OPTIONAL)
       # Making a section skinnier may require fewer optics slices or related display buttons
@@ -335,6 +353,10 @@ Hutches:
 #                E Hutch                #           
 #########################################
 
+#   ID      - Label to identify hutch, will display as {Sector}-{Type}-{ID}
+#   prefix  - IOC Prefix, can be used in related-display macros 
+#   shutter - BLEPS shutter initialism
+
     - ID: 'E'
       prefix: "8ide"
       shutter: "SES"
@@ -355,6 +377,11 @@ Hutches:
       # Default is:
       # 
       # beam-shape: [ 0x100, 380x100 ]
+        
+      # PSS station ID for displayed beam (OPTIONAL)
+      # Default is:
+      # 
+      # beam-station: "{ID}"
         
       # Width, in pixels, of the hutch's section. (OPTIONAL)
       # Making a section skinnier may require fewer optics slices or related display buttons
@@ -502,6 +529,10 @@ Hutches:
 #                I Hutch                #
 #########################################
             
+#   ID      - Label to identify hutch, will display as {Sector}-{Type}-{ID}
+#   prefix  - IOC Prefix, can be used in related-display macros 
+#   shutter - BLEPS shutter initialism
+
     - ID: 'I'
       prefix: "8idi"
       shutter: "SIS"
@@ -517,6 +548,11 @@ Hutches:
       # Default is:
       # 
       # beam-shape: [ 0x100, 380x100 ]
+        
+      # PSS station ID for displayed beam (OPTIONAL)
+      # Default is:
+      # 
+      # beam-station: "{ID}"
         
       # Width, in pixels, of the hutch's section. (OPTIONAL)
       # Making a section skinnier may require fewer optics slices or related display buttons

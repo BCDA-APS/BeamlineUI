@@ -78,6 +78,7 @@ Single_Hutch: !Template:Hutch
     - !Defaults
         hutch-width: 415
         beam-shape: [ 15x100, 394x100 ]
+        beam-station: "{ID}"
         IOC-Links:
             - { label: "IOC Debug", file: "{prefix}_all.ui" }
     
@@ -98,7 +99,7 @@ Single_Hutch: !Template:Hutch
                         border-width: 3
                                             
                         points: "{beam-shape}"
-                        visibility: "S{Sector:02d}{Type}-PSS:Sta{ID}:BeamPresentM"
+                        visibility: "S{Sector:02d}{Type}-PSS:Sta{beam-station}:BeamPresentM"
                             
                     Hutch_Links: !VAnchor:HCenter:Grid
                         margins: 0x0x0x15
@@ -222,9 +223,9 @@ Ops: !hcenter:hflow
                         - !HFlow
                             padding: 10
                             children:
-                                - !Text { <<: *row_label, text: "{label}:" }
-                                - !Apply:OPSReadback { <<: *beam_rdbk, read-pv: "S{Sector:02d}{Type}:{label}{Type}:EnergyM", units: "keV" }
-                                - !Apply:OPSReadback { <<: *beam_rdbk, read-pv: "S{Sector:02d}{Type}:{label}{Type}:GapM",    units: "mm"  }
+                                - !Text { <<: *row_label, text: "{val}:" }
+                                - !Apply:OPSReadback { <<: *beam_rdbk, read-pv: "S{Sector:02d}{Type}:{val}{Type}:EnergyM", units: "keV" }
+                                - !Apply:OPSReadback { <<: *beam_rdbk, read-pv: "S{Sector:02d}{Type}:{val}{Type}:GapM",    units: "mm"  }
             
         #############
         # BPM Panel #
