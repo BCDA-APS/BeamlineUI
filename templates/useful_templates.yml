@@ -2,7 +2,6 @@
 
 anonymous_blue: &anonymous_blue $325D9C
 
-
 _ReadbackUnits: !Template:Readback
     - !Defaults
         fontname: "Liberation Sans"
@@ -16,40 +15,31 @@ _ReadbackUnits: !Template:Readback
         label: False
     
     - !hflow
-        children:
-            - !Debug:Conditional
-                condition: "label"
-                
-                children:
-                    - !Text
-                        foreground: "{label-color}"
-                        geometry: "{label-width}x{text-height}"
-                        font: "-{fontname} -Regular -{fontsize}"
-                        alignment: Right
-                        text: "{label}"
-                        
-            - !Conditional
-                condition: "label"
-                children:
-                    - !Spacer { geometry: "{spacing}x0" }
-            
-            - !TextMonitor
-                foreground: "{read-color}"
-                geometry: "{read-width}x{text-height}"
+        - !If:label
+            - !Text
+                foreground: "{label-color}"
+                geometry: "{label-width}x{text-height}"
                 font: "-{fontname} -Regular -{fontsize}"
-                pv: "{read-pv}"
                 alignment: Right
-                
-            - !Conditional
-                condition: "units"
-                
-                children:
-                    - !Text
-                        foreground: "{units-color}"
-                        geometry: "{spacing}x0 x {units-width}x{text-height}"
-                        alignment: Left
-                        font: "-{fontname} -Regular -{fontsize}"
-                        text: "{units}"
+                text: "{label}"
+                    
+        - !If:label
+            - !Spacer { geometry: "{spacing}x0" }
+        
+        - !TextMonitor
+            foreground: "{read-color}"
+            geometry: "{read-width}x{text-height}"
+            font: "-{fontname} -Regular -{fontsize}"
+            pv: "{read-pv}"
+            alignment: Right
+            
+        - !If:units
+            - !Text
+                foreground: "{units-color}"
+                geometry: "{spacing}x0 x {units-width}x{text-height}"
+                alignment: Left
+                font: "-{fontname} -Regular -{fontsize}"
+                text: "{units}"
 
                         
 _OpsSlice: !Template:OPS_Slice
@@ -68,15 +58,10 @@ _OpsSlice: !Template:OPS_Slice
     - !Group
         geometry: 40x200
         children:
-            - !Conditional
-                condition: "used"
+            - !If:used
                 children:
-                    Optics_Icon: !Conditional
-                        condition: "image"
-                        children:
-                            - !Image
-                                geometry: "0x{image-pos} x 40x60"
-                                file: "{image}"
+                    Optics_Icon: !If:image
+                        - !Image { geometry: "0x{image-pos} x 40x60", file: "{image}" }
                     
                     Optics_Link: !HCenter:RelatedDisplay
                         geometry: "0x{link-pos} x 24x24"
@@ -89,184 +74,7 @@ _OpsSlice: !Template:OPS_Slice
                         text: "{name}"
                         alignment: Center
                         
-                    Second_Line: !Conditional
-                        condition: "name2"
-                        children:
-                            - !Hstretch:Text
-                                geometry: "0x47 x 0x15"
-                                text: "{name2}"
-                                alignment: Center
+                    Second_Line: !If:name2
+                        - !Hstretch:Text { geometry: "0x47 x 0x15", text: "{name2}", alignment: Center }
 
                                 
-                                
-_MiniMotor: !Template:MiniMotor
-    - !group
-        geometry: "160x0"
-        
-        border-color: $00358
-        border-width: 3
-        
-        margins: 0x0x0x10
-        
-        children:
-            - !caCalc
-                foreground: *transparent
-                background: *transparent
-            
-                variable: "$(P)$(R){motor-pv}:HighLimits"
-                calc: "((D=0)&&(B=1))*3+A*(B=1)+2*C"
-                channel: "$(P)$(R){motor-pv}.LVIO"
-                channelB: "$(P)$(R){motor-pv}.DIR"
-                channelC: "$(P)$(R){motor-pv}.HLS"
-                channelD: "$(P)$(R){motor-pv}.DMOV"
-                
-                eventSignal: caCalc::onAnyChange
-                
-                geometry: 10x10 x 0x0
-                
-            - !caCalc
-                foreground: *transparent
-                background: *transparent
-            
-                variable: "$(P)$(R){motor-pv}:LowLimits"
-                calc: "((D=0)&&(B=1))*3+A*(B=1)+2*C"
-                channel: "$(P)$(R){motor-pv}.LVIO"
-                channelB: "$(P)$(R){motor-pv}.DIR"
-                channelC: "$(P)$(R){motor-pv}.LLS"
-                channelD: "$(P)$(R){motor-pv}.DMOV"
-                
-                eventSignal: caCalc::onAnyChange
-                
-                geometry: 10x10 x 0x0
-            
-            - !HStretch:VFlow
-                padding: 10
-                children:
-                    - !HStretch:TextMonitor
-                        background: *header_blue
-                        foreground: *white
-                        
-                        alignment: Center
-                        
-                        geometry: 0x21
-                        
-                        pv: "$(P)$(R){motor-pv}.DESC"
-                        
-                    - !HCenter:HFlow
-                        padding: 5
-                        children:
-                            - !group
-                                visibility: "$(P)$(R){motor-pv}:LowLimits"
-                                geometry: 6x73
-                                
-                                children:                            
-                                    - !AStretch:LED
-                                        pv: "$(P)$(R){motor-pv}:LowLimits"
-                                        
-                                        false-value: 1
-                                        false-color: *alarm_yellow
-                                        
-                                        true-value: 2
-                                        true-color: *alarm_red
-                                        
-                                        undefined-color: *alarm_green
-
-                                        border-color: *transparent
-                                        square: true
-
-                            
-                            - !VFlow
-                                geometry: 120x0
-                                padding: 2
-                                children:
-                                    - !HCenter:TextMonitor
-                                        background: *transparent
-                                        foreground: *header_blue
-                                        
-                                        geometry: 120x17
-                                        alignment: Center
-                                        
-                                        pv: "$(P)$(R){motor-pv}.EGU"
-            
-                                    - !HCenter:TextMonitor
-                                        foreground: *header_blue
-                                        alignment: Center
-                                        
-                                        pv: "$(P)$(R){motor-pv}.RBV"
-                                        
-                                        geometry: 116x27
-                        
-                                    - !HCenter:TextEntry
-                                        <<: *editable
-                                        geometry: 114x25
-                                        pv: "$(P)$(R){motor-pv}.VAL"
-                                        
-                            - !group
-                                visibility: "$(P)$(R){motor-pv}:HighLimits"
-                                
-                                geometry: 6x73
-                                
-                                children:
-                                    - !AStretch:LED
-                                        pv: "$(P)$(R){motor-pv}:HighLimits"
-                                        
-                                        false-value: 1
-                                        false-color: *alarm_yellow
-                                        
-                                        true-value: 2
-                                        true-color: *alarm_red
-                                        
-                                        undefined-color: *alarm_green
-                                        
-                                        border-color: *transparent
-                                        square: true
-                        
-                    - !HCenter:HFlow
-                        padding: 4
-                        children:
-    
-                            - !MessageButton
-                                background: *edit_blue
-                                
-                                geometry: 24x24
-                                value: "1"
-                                pv: "$(P)$(R){motor-pv}.TWR"
-                                text: "<"
-                                
-                            - !TextEntry
-                                background: *edit_blue
-                                
-                                geometry: 80x24
-                                
-                                pv: "$(P)$(R){motor-pv}.TWV"
-                            
-                            - !MessageButton
-                                background: *edit_blue
-                                
-                                geometry: 24x24
-                                value: "1"
-                                pv: "$(P)$(R){motor-pv}.TWF"
-                                text: ">"
-                                
-                    - !HCenter:HFlow
-                        padding: 10
-                        children:
-                            - !RelatedDisplay
-                                <<: *editable
-                                geometry: 65x20
-                                text: "More"
-                                
-                                links:
-                                    - { label: "Help",  file: "motorx_help.ui",  macros: "P=$(P)$(R),M={motor-pv}" }
-                                    - { label: "More",  file: "motorx_more.ui",  macros: "P=$(P)$(R),M={motor-pv}" }
-                                    - { label: "Setup", file: "motorx_setup.ui", macros: "P=$(P)$(R),M={motor-pv}" }
-                                    - { label: "All",   file: "motorx_all.ui",   macros: "P=$(P)$(R),M={motor-pv}" }
-                                    
-                            - !MessageButton
-                                background: *alarm_red
-                                foreground: *alarm_yellow
-                                
-                                geometry: 65x20
-                                pv: "$(P)$(R){motor-pv}.STOP"
-                                value: "1"
-                                text: "STOP"

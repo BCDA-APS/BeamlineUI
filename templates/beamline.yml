@@ -83,60 +83,59 @@ Single_Hutch: !Template:Hutch
             - { label: "IOC Debug", file: "{prefix}_all.ui" }
     
     - !group
-        children:
-            - !group
-                geometry: "0x25 x {hutch-width}x350"
-                
-                border-width: 4
-                border-color: *grey_darker
-                background:   *grey_lighter
-                
-                children:
-                    Beam: !HStretch:Polyline
-                        geometry: 0x16 x 0x200
+        - !group
+            geometry: "0x25 x {hutch-width}x350"
+            
+            border-width: 4
+            border-color: *grey_darker
+            background:   *grey_lighter
+            
+            children:
+                Beam: !HStretch:Polyline
+                    geometry: 0x16 x 0x200
+                    
+                    border-color: *alarm_red
+                    border-width: 3
+                                        
+                    points: "{beam-shape}"
+                    visibility: "S{Sector:02d}{Type}-PSS:Sta{beam-station}:BeamPresentM"
                         
-                        border-color: *alarm_red
-                        border-width: 3
-                                            
-                        points: "{beam-shape}"
-                        visibility: "S{Sector:02d}{Type}-PSS:Sta{beam-station}:BeamPresentM"
+                Hutch_Links: !VAnchor:HCenter:Grid
+                    margins: 0x0x0x15
+                    padding: 15
+                    aspect-ratio: 1.5
+                    repeat-over: "buttons"
+                    
+                    children:
+                        - !RelatedDisplay
+                            background: $BBC187
+                            geometry: 114x45
+                            font: -Liberation Sans Mono -Bold -9
+                            text: "{title:^14s}"
+                            links: "{links}"
                             
-                    Hutch_Links: !VAnchor:HCenter:Grid
-                        margins: 0x0x0x15
-                        padding: 15
-                        aspect-ratio: 1.5
-                        repeat-over: "buttons"
+                Hutch_Optics: !HRepeat
+                    geometry: 15x20 x 0x0
+                    repeat-over: "optics"
+                    padding: 9
+                    children: [ !Apply:OPS_Slice ]
                         
-                        children:
-                            - !RelatedDisplay
-                                background: $BBC187
-                                geometry: 114x45
-                                font: -Liberation Sans Mono -Bold -9
-                                text: "{title:^14s}"
-                                links: "{links}"
-                                
-                    Hutch_Optics: !HRepeat
-                        geometry: 15x20 x 0x0
-                        repeat-over: "optics"
-                        padding: 9
-                        children: [ !Apply:OPS_Slice ]
+                Additional_Image: !Conditional
+                    condition: "hutch-img"
+                    children:
+                        - !Image
+                            geometry: "{image-x} x {image-y} x 90x25"
+                            file: "{hutch-img}"
                             
-                    Additional_Image: !Conditional
-                        condition: "hutch-img"
-                        children:
-                            - !Image
-                                geometry: "{image-x} x {image-y} x 90x25"
-                                file: "{hutch-img}"
-                                
-            - !HCenter:RelatedDisplay
-                geometry: 120x50
-                background: *header_blue
-                foreground: *white
-                
-                font: -Liberation Sans -Regular -14
-                
-                text: "{Sector:>3d}-{Type}-{ID:<3s}"
-                links: "{IOC-Links}"
+        - !HCenter:RelatedDisplay
+            geometry: 120x50
+            background: *header_blue
+            foreground: *white
+            
+            font: -Liberation Sans -Regular -14
+            
+            text: "{Sector:>3d}-{Type}-{ID:<3s}"
+            links: "{IOC-Links}"
 
                 
                 
@@ -288,12 +287,12 @@ Ops: !hcenter:hflow
                 - !vrepeat
                     geometry: 50x0 x 0x0
                     repeat-over: "Hutches"
-                    padding: 5
+                    
                     children: 
-                        - !HFlow
-                            children:                                   
-                                - !Text             { geometry: 62x22, font: -Liberation Sans, alignment: TopLeft,    text: "Shutter" }
-                                - !Text             { geometry: 20x22, font: -Liberation Mono, alignment: BottomLeft, text: "{ID}:" }
+                        - !If:shutter
+                            - !HFlow
+                                - !Text    { geometry: 62x22, font: -Liberation Sans, alignment: TopLeft,    text: "Shutter" }
+                                - !Text    { geometry: 20x22, font: -Liberation Mono, alignment: BottomLeft, text: "{ID}:" }
                                 - !Group
                                     margins: 20x0x5x0
                                     geometry: 75x22
@@ -326,6 +325,8 @@ Ops: !hcenter:hflow
                                             foreground: *pure_white
                                             text: "Open"
                                             font: -Liberation Sans -Bold -11
+                                            
+                            - !Spacer { geometry: 0x27 }
                 
                     
 UITitle: !Apply:ScreenHeader

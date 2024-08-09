@@ -219,7 +219,7 @@ Hutches:
 
     - ID: 'D'
       prefix: "8idd"
-      shutter: "SDS"
+      #shutter: "SDS"
         
       # Related displays that will be linked in IOC name button (OPTIONAL)
       # Default is:
