@@ -1,4 +1,4 @@
-GESTALT = /home/beams/KLANG/Documents/Projects/Repository/git/gestalt/gestalt.py
+GESTALT = /APSshare/bin/gestalt
 
 all: $(SCREENS)
 
@@ -6,11 +6,13 @@ define MY_RULE
 $(1)-FILE_BASE := $$(patsubst %.ui,%,$(1))
 $(1)-TEMPLATE  := $$(if $$($$($(1)-FILE_BASE)_TEMPLATE),$$($$($(1)-FILE_BASE)_TEMPLATE),$$($(1)-FILE_BASE).yml)
 $(1)-DATA      := $$(if $$($$($(1)-FILE_BASE)_INPUT),--input $$($$($(1)-FILE_BASE)_INPUT),)
+$(1)-DATATYPE  := $$(if $$($$($(1)-FILE_BASE)_TYPE),--from $$($$($(1)-FILE_BASE)_TYPE),)
+$(1)-REQUIRE   := $$(if $$(filter $$($$($(1)-FILE_BASE)_TYPE),str),$$($(1)-TEMPLATE),$$($(1)-TEMPLATE) $$($$($(1)-FILE_BASE)_INPUT))
 
 $(1): $$(INSTALL_DIR)/$(1)
 
-$$(INSTALL_DIR)/$(1): $$($(1)-TEMPLATE) $$($$($(1)-FILE_BASE)_INPUT)
-	$(GESTALT) --to ui $$($(1)-DATA) --out $$@ $$($(1)-TEMPLATE)
+$$(INSTALL_DIR)/$(1): $$($(1)-REQUIRE)
+	$(GESTALT) --to ui $$($(1)-DATATYPE) $$($(1)-DATA) --out $$@ $$($(1)-TEMPLATE)
 	
 endef
 
