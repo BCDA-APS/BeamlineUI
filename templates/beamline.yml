@@ -120,13 +120,9 @@ Single_Hutch: !Template:Hutch
                     padding: 9
                     children: [ !Apply:OPS_Slice ]
                         
-                Additional_Image: !Conditional
-                    condition: "hutch-img"
-                    children:
-                        - !Image
-                            geometry: "{image-x} x {image-y} x 90x25"
-                            file: "{hutch-img}"
-                            
+                Additional_Image: !If:hutch-img
+                    - !Image { geometry: "{image-x} x {image-y} x 90x25", file: "{hutch-img}" }
+                                    
         - !HCenter:RelatedDisplay
             geometry: 120x50
             background: *header_blue
@@ -287,7 +283,7 @@ Ops: !hcenter:hflow
                 - !vrepeat
                     geometry: 50x0 x 0x0
                     repeat-over: "Hutches"
-                    
+                    padding: 5
                     children: 
                         - !If:shutter
                             - !HFlow
@@ -318,6 +314,8 @@ Ops: !hcenter:hflow
                                             foreground: *pure_white
                                             text: "Close"
                                             font: -Liberation Sans -Bold -11
+                                            value: 1
+                                            pv: "S{Sector:02d}{Type}-PSS:{shutter}:CloseEPICSC"
                                             
                                         - !MessageButton
                                             geometry: 60x22
@@ -325,6 +323,8 @@ Ops: !hcenter:hflow
                                             foreground: *pure_white
                                             text: "Open"
                                             font: -Liberation Sans -Bold -11
+                                            value: 1
+                                            pv: "S{Sector:02d}{Type}-PSS:{shutter}:OpenEPICSC"
                                             
                             - !Spacer { geometry: 0x27 }
                 
@@ -335,7 +335,7 @@ UITitle: !Apply:ScreenHeader
     title: "Beamline {Sector}-{Type}"
 
 Time: !HAnchor:TextMonitor
-    geometry: 0x15 x 250x24
+    geometry: 0x15 x 270x24
     alignment: Left
     foreground: *alarm_yellow
     font: "Liberation Sans -Regular -12"
