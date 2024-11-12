@@ -103,6 +103,7 @@ Single_Hutch: !Template:Hutch
                 Hutch_Links: !VAnchor:HCenter:Grid
                     margins: 0x0x0x15
                     padding: 15
+                    max-rows: 2
                     aspect-ratio: 1.5
                     repeat-over: "buttons"
                     
