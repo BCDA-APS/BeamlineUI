@@ -279,8 +279,8 @@ Shutter_Info: !Template:OPS_Shutter
                             margins: 20x0x5x0
                             geometry: 75x22
                             children:
-                                - !AStretch:Text { <<: *warn_text, text: "Closed", visibility: "{Sector}{Type}:BLEPS:{shutter}_CLOSED" }
-                                - !AStretch:Text { <<: *okay_text, text: "Open",   visibility: !not "{Sector}{Type}:BLEPS:{shutter}_CLOSED" }
+                                - !AStretch:Text { <<: *warn_text, text: "Closed", visibility: !not "S{Sector:02d}{Type}-PSS:Sta{ID}:BeamPresentM" }
+                                - !AStretch:Text { <<: *okay_text, text: "Open",   visibility: "S{Sector:02d}{Type}-PSS:Sta{ID}:BeamPresentM" }
                                     
                         - !Group
                             margins: 0x0x15x0
