@@ -272,43 +272,44 @@ Shutter_Info: !Template:OPS_Shutter
                 repeat-over: "{Hutch-list}"
                 padding: 5
                 children: 
-                    - !HFlow
-                        - !Text             { geometry: 62x22, font: -Liberation Sans, alignment: TopLeft,    text: "Shutter" }
-                        - !Text             { geometry: 20x22, font: -Liberation Mono, alignment: BottomLeft, text: "{ID}:" }
-                        - !Group
-                            margins: 20x0x5x0
-                            geometry: 75x22
-                            children:
-                                - !AStretch:Text { <<: *warn_text, text: "Closed", visibility: !not "S{Sector:02d}{Type}-PSS:Sta{ID}:BeamPresentM" }
-                                - !AStretch:Text { <<: *okay_text, text: "Open",   visibility: "S{Sector:02d}{Type}-PSS:Sta{ID}:BeamPresentM" }
-                                    
-                        - !Group
-                            margins: 0x0x15x0
-                            geometry: 55x22
-                            children:
-                                - !AStretch:Text { <<: *warn_text, text: "No",  visibility: !not "S{Sector:02d}{Type}-PSS:Sta{ID}:SecureM" }
-                                - !AStretch:Text { <<: *okay_text, text: "Yes", visibility: "S{Sector:02d}{Type}-PSS:Sta{ID}:SecureM" }
-                                
-                        - !If:BLEPS-control
-                            - !HFlow
-                                geometry: 130x22
-                                padding: 10
-                                visibility: "{Sector}{Type}:BLEPS:{shutter}_PERMIT"
+                    - !If:shutter
+                        - !HFlow
+                            - !Text             { geometry: 62x22, font: -Liberation Sans, alignment: TopLeft,    text: "Shutter" }
+                            - !Text             { geometry: 20x22, font: -Liberation Mono, alignment: BottomLeft, text: "{ID}:" }
+                            - !Group
+                                margins: 20x0x5x0
+                                geometry: 75x22
                                 children:
-                                    - !MessageButton
-                                        geometry: 60x22
-                                        background: *darkred
-                                        foreground: *pure_white
-                                        text: "Close"
-                                        font: -Liberation Sans -Bold -11
-                                        value: 1
-                                        pv: "S{Sector:02d}{Type}-PSS:{shutter}:CloseEPICSC"
+                                    - !AStretch:Text { <<: *warn_text, text: "Closed", visibility: !not "S{Sector:02d}{Type}-PSS:Sta{ID}:BeamPresentM" }
+                                    - !AStretch:Text { <<: *okay_text, text: "Open",   visibility: "S{Sector:02d}{Type}-PSS:Sta{ID}:BeamPresentM" }
                                         
-                                    - !MessageButton
-                                        geometry: 60x22
-                                        background: *darkgreen
-                                        foreground: *pure_white
-                                        text: "Open"
-                                        font: -Liberation Sans -Bold -11
-                                        value: 1
-                                        pv: "S{Sector:02d}{Type}-PSS:{shutter}:OpenEPICSC"
+                            - !Group
+                                margins: 0x0x15x0
+                                geometry: 55x22
+                                children:
+                                    - !AStretch:Text { <<: *warn_text, text: "No",  visibility: !not "S{Sector:02d}{Type}-PSS:Sta{ID}:SecureM" }
+                                    - !AStretch:Text { <<: *okay_text, text: "Yes", visibility: "S{Sector:02d}{Type}-PSS:Sta{ID}:SecureM" }
+                                    
+                            - !If:BLEPS-control
+                                - !HFlow
+                                    geometry: 130x22
+                                    padding: 10
+                                    visibility: "{Sector}{Type}:BLEPS:{shutter}_PERMIT"
+                                    children:
+                                        - !MessageButton
+                                            geometry: 60x22
+                                            background: *darkred
+                                            foreground: *pure_white
+                                            text: "Close"
+                                            font: -Liberation Sans -Bold -11
+                                            value: 1
+                                            pv: "S{Sector:02d}{Type}-PSS:{shutter}:CloseEPICSC"
+                                            
+                                        - !MessageButton
+                                            geometry: 60x22
+                                            background: *darkgreen
+                                            foreground: *pure_white
+                                            text: "Open"
+                                            font: -Liberation Sans -Bold -11
+                                            value: 1
+                                            pv: "S{Sector:02d}{Type}-PSS:{shutter}:OpenEPICSC"
