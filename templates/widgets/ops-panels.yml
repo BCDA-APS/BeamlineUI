@@ -1,4 +1,5 @@
 #include colors.yml
+#include read-write.yml
 
 ###########################
 # General Widget Settings #
@@ -59,7 +60,7 @@ OPSLink: &ops_link
 
 
 OPS_readback: !Template:OPSReadback        
-    - !Apply:PVControl
+    - !Apply:PVReadWrite
         spacing: 10
         height: 21
         read-foreground: *alarm_yellow
@@ -105,8 +106,8 @@ SR_Info: !Template:OPS_Ring
             - !hflow
                 padding: 10
                 children:                            
-                    - !Apply:OPSReadback { <<: *ops_info, read-pv: "S-DCCT:CurrentM",   units: "mA" }
-                    - !Apply:OPSReadback { <<: *ops_info, read-pv: "S:SRlifeTimeHrsCC", units: "hrs"}
+                    - !Apply:OPSReadback { <<: *ops_info, read-pv: "S-DCCT:CurrentM",  units: "mA" }
+                    - !Apply:OPSReadback { <<: *ops_info, read-pv: "S-DCCT:LifetimeM", units: "min"}
                         
             - !Apply:OPSReadback { <<: *ops_message, label: "Fill:",    read-pv: "OPS:message3"  }
             - !Apply:OPSReadback { <<: *ops_message, label: "Desired:", read-pv: "S:DesiredMode" }

@@ -1,6 +1,5 @@
 #include colors.yml
 #include widgets.yml
-#include widgets/pv-control.yml
 #include widgets/ops-slice.yml
 #include widgets/ops-panels.yml
     
