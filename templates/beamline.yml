@@ -116,3 +116,11 @@ Time: !HAnchor:TextMonitor
     font: "Liberation Sans -Regular -12"
     pv: "S:IOC:timeOfDayForm1SI"
     
+SoftIOCStatus: !HCenter:ShellCommand
+    background: *edit_blue
+    geometry: 0x10 x 120x32
+    text: "SoftIOCs"
+    
+    commands:
+        - { label: "iocman", command: "/APSshare/bin/iocman &" }
+    

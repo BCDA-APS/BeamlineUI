@@ -247,7 +247,7 @@ Shutter_Info: !Template:OPS_Shutter
             - {label: "Extra",        file: "bleps_extras", macros: "P={Sector}{Type}:"}
             - {label: "FIFO",         file: "bleps_fifo",   macros: "P={Sector}{Type}:"}
             
-        BLEPS-control: False
+        BLEPS-control: True
     
     
     -  !vflow
