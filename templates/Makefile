@@ -21,5 +21,6 @@ SCREENS += 8idi_all.ui
 SCREENS += 8id.ui
 8id_TEMPLATE = beamline.yml
 8id_INPUT = data/8id.yml
+8id_DEPENDS = widgets/ops-panels.yml widgets/ops-slice.yml
 
 include $(TOP)/configure/RULES_YML2UI
