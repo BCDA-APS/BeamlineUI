@@ -17,7 +17,7 @@ $(1)-DATA      := $$(if $$($$($(1)-FILE_BASE)_INPUT),--input $$($$($(1)-FILE_BAS
 $(1)-DATATYPE  := $$(if $$($$($(1)-FILE_BASE)_TYPE),--from $$($$($(1)-FILE_BASE)_TYPE),)
 $(1)-REQUIRE   := $$(if $$(filter $$($$($(1)-FILE_BASE)_TYPE),str),$$($(1)-TEMPLATE),$$($(1)-TEMPLATE) $$($$($(1)-FILE_BASE)_INPUT))
 
-$$(INSTALL_DIR)/$(1): $$($(1)-REQUIRE)
+$$(INSTALL_DIR)/$(1): $$($(1)-REQUIRE) $$($$($(1)-FILE_BASE)_DEPENDS) $(GESTALT)
 	$(GESTALT) --to ui $$($(1)-DATATYPE) $$($(1)-DATA) --out $$@ $$($(1)-TEMPLATE)
 	
 endef
