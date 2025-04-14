@@ -1,0 +1,11 @@
+# Define the path to the synApps support directory and uncomment.
+SUPPORT=/APSshare/epics/synApps_6_3/support
+EPICS_BASE=/APSshare/epics/base-7.0.8
+
+# Specify the standard synApps configuration.
+-include $(SUPPORT)/configure/RELEASE
+
+# Add any additional folder definitions
+CONTROL_SCREENS=/APSshare/adlsys
+
+# You'll still need to provide the relative path to the ui/adl folder in setup_epics_common

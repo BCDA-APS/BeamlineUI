@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+export DEFAULT_UI_FILE=${1}
+export UI_FILE_MACROS=${2:-'"P="'}
+
+export EPICS_APP=$(readlink -f $0)/..
+
+#export EPICS_CA_ADDR_LIST="10.54.116.255 $EPICS_CA_ADDR_LIST 164.54.188.8"
+#export EPICS_CA_AUTO_ADDR_LIST="NO"
+
+source ${EPICS_APP}/setup_epics_common caqtdm
+
+if [ -z "/APSshare/caqtdm" ]; then
+  CAQTDM_DISPLAY_PATH=$CAQTDM_DISPLAY_PATH:/APSshare/uisys/sr/id
+fi
+
+if [ -z "/APSshare/caqtdm" ]; then
+  export PATH=${PATH}:/APSshare/bin
+  export QT_PLUGIN_PATH=/APSshare/caqtdm/plugins
+  export LD_LIBRARY_PATH=/APSshare/caqtdm/lib
+  export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${EPICS_BASE}/lib/linux-x86_64
+else
+  export QT_PLUGIN_PATH=/usr/local/epics/extensions/lib/linux-x86_64
+fi
+
+
+/APSshare/bin/caQtDM -style plastique -noMsg -macro ${UI_FILE_MACROS} ${DEFAULT_UI_FILE}

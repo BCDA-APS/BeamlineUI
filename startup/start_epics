@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+export UI_APP=`dirname ${BASH_SOURCE:-$0}`
+
+$UI_APP/start_screen 100id.ui
