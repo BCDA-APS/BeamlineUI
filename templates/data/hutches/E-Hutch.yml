@@ -1,0 +1,113 @@
+Header: "100-ID-E"
+
+
+############################
+#   Equipment Definitions  #
+############################
+
+# Top level screen will include all hutch files, so use unique names
+
+
+#########################################
+#   Information for Top-Level Screen    #
+#########################################
+
+E-Hutch: &EHutch
+
+#   ID      - Label to identify hutch, will display as {Sector}-{Type}-{ID}
+#   prefix  - IOC Prefix, can be used in related-display macros 
+#   shutter - BLEPS shutter initialism
+
+    - ID: 'E'
+      prefix: "100ide"
+      shutter: "SES"
+        
+      # Related displays that will be linked in IOC name button (OPTIONAL)
+      # Default is:
+      # 
+      # IOC-Links:
+      #      - { label: "IOC Debug", file: "{prefix}_all" }
+        
+      IOC-Links:
+            - { label: "100ide", file: "100ide_all", macros: "" }
+            - { label: "Full Hutch", file: "8id", macros: "", replace: True }
+            - { label: "LDDP-Mode", file: "8id_alt", macros: "", replace: True }
+        
+      # Set of points to control the displayed beam when shutters are open (OPTIONAL)
+      # Size of canvas is 380x200, with the visual display of optics is centered at y=100
+      # Default is:
+      # 
+      # beam-shape: [ 0x100, 380x100 ]
+        
+      # PSS station ID for displayed beam (OPTIONAL)
+      # Default is:
+      # 
+      # beam-station: "{ID}"
+        
+      # Width, in pixels, of the hutch's section. (OPTIONAL)
+      # Making a section skinnier may require fewer optics slices or related display buttons
+      # Default is:
+      #   
+      # hutch-width: 415
+        
+            
+      
+      buttons:
+            
+    ##################################
+    #  Miscellaneous Linked Screens  #
+    ##################################
+    
+    #   title - Display title for button (max chars 15)
+    #   links - List of displays to link to
+    # 
+    #   Default width of 415px equates to six buttons per hutch
+            
+        - title: "Motors 1"
+          links:
+            - { label: "VME 1-8",   file: "topMotors8", macros: "P={prefix}:,M1=m1,M2=m2,M3=m3,M4=m4,M5=m5,M6=m6,M7=m7,M8=m8" }
+            - { label: "VME 9-16",  file: "topMotors8", macros: "P={prefix}:,M1=m9,M2=m10,M3=m11,M4=m12,M5=m13,M6=m14,M7=m15,M8=m16" }
+            - { label: "VME 17-24", file: "topMotors8", macros: "P={prefix}:,M1=m17,M2=m18,M3=m19,M4=m20,M5=m21,M6=m22,M7=m23,M8=m24" }
+            - { label: "CR8-E1 1-8",   file: "topMotors8", macros: "P=100ideSoft:CR8-E1:,M1=m1,M2=m2,M3=m3,M4=m4,M5=m5,M6=m6,M7=m7,M8=m8"}
+            - { label: "CR8-E1 9-16",  file: "topMotors8", macros: "P=100ideSoft:CR8-E1:,M1=m9,M2=m10,M3=m11,M4=m12,M5=m13,M6=m14,M7=m15,M8=m16"}
+            - { label: "CR8-E2 1-8",   file: "topMotors8", macros: "P=100ideSoft:CR8-E2:,M1=m1,M2=m2,M3=m3,M4=m4,M5=m5,M6=m6,M7=m7,M8=m8"}
+            - { label: "CR8-E2 9-16",  file: "topMotors8", macros: "P=100ideSoft:CR8-E2:,M1=m9,M2=m10,M3=m11,M4=m12,M5=m13,M6=m14,M7=m15,M8=m16"}
+            
+        - title: "Scans"
+          links:
+            - { label: "Scan1 (for all scans)",             file: "scan", macros: "P=100ideSoft:,N=1,S=scan1" }
+            - { label: "Scan2 (for 2D &amp; higher scans)", file: "scan", macros: "P=100ideSoft:,N=2,S=scan2" }
+            - { label: "Scan3 (for 3D &amp; higher scans)", file: "scan", macros: "P=100ideSoft:,N=3,S=scan3" }
+            - { label: "Scan4 (for 4D scans)",              file: "scan", macros: "P=100ideSoft:,N=4,S=scan4" }
+            - { label: "ScanH (hardware assisted scans)",   file: "scan", macros: "P=100ideSoft:,N=H,S=scanH" }
+            - { label: "saveData.ui", file: "scan_saveData", macros: "P=100ideSoft" }
+            
+        - title: "Calcs"
+          links:
+            - { label: "user calculation 1", file: "userCalc", macros: "P=100ideSoft:,C=userCalc1" }
+            - { label: "user calculation 2", file: "userCalc", macros: "P=100ideSoft:,C=userCalc2" }
+            - { label: "user calculation 3", file: "userCalc", macros: "P=100ideSoft:,C=userCalc3" }
+            - { label: "user calculation 4", file: "userCalc", macros: "P=100ideSoft:,C=userCalc4" }
+            - { label: "user calculation 5", file: "userCalc", macros: "P=100ideSoft:,C=userCalc5" }
+            - { label: "user calcs 1-10", file: "userCalcs10", macros: "P=100ideSoft:" }
+            
+        - title: "Motors 2"
+          links: 
+            - { label: "Aerotech 1-8",      file: "topMotors8", macros: "P=100ideAerotech:,M1=m1,M2=m2,M3=m3,M4=m4,M5=m5,M6=m6,M7=m7,M8=m8"}
+            - { label: "Transfocator 1-8",  file: "topMotors8", macros: "P=8iddSoft:TRANS:,M1=m15,M2=m16,M3=m17,M4=m18,M5=m19,M6=m20,M7=m21,M8=m22"}
+            - { label: "Transfocator 9-14", file: "topMotors8", macros: "P=8iddSoft:TRANS:,M1=m23,M2=m24,M3=m25,M4=m26,M5=m27,M6=m28,M7=unused,M8=unused"}
+            - { label: "KB Horizontal",     file: "KB_mirror_admin.ui", macros: "P=8idKB:,T=Horizontal,USM=m17,USCM=m9,USFM=m4,USC=cap5,DSM=m18,DSCM=m13,DSFM=m5,DSC=cap6,Q=horiz:,BDM=m14,BDC=cap8,BUM=m10,BUC=cap7"}
+            - { label: "KB Vertical",       file: "KB_mirror_admin.ui", macros: "P=8idKB:,T=Vertical,USM=m15,USCM=m7,USFM=m1,USC=cap1,DSM=m16,DSCM=m11,DSFM=m2,DSC=cap2,Q=vert:,BDM=m12,BDC=cap4,BUM=m8,BUC=cap3"}
+            - { label: "KB Combined Motion 1", file: "flexCombinedMotionTop", macros: "P=8idKB:,M=m15,CM=m7,FM=m1,C=cap1"}
+            - { label: "KB Combined Motion 2", file: "flexCombinedMotionTop", macros: "P=8idKB:,M=m16,CM=m11,FM=m2,C=cap2"}
+            - { label: "KB Combined Motion 5", file: "flexCombinedMotionTop", macros: "P=8idKB:,M=m17,CM=m9,FM=m4,C=cap5"}
+            - { label: "KB Combined Motion 6", file: "flexCombinedMotionTop", macros: "P=8idKB:,M=m18,CM=m13,FM=m5,C=cap6"}
+            
+            
+        - title: "Serial"
+          links: 
+            - {label: "", file: "", macros: ""}
+            
+        - title: ""
+          links: 
+            - {label: "", file: "", macros: ""}

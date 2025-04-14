@@ -1,0 +1,95 @@
+Header: "100-ID-D"
+
+
+############################
+#   Equipment Definitions  #
+############################
+
+# Top level screen will include all hutch files, so use unique names
+
+
+#########################################
+#   Information for Top-Level Screen    #
+#########################################
+
+D-Hutch: &DHutch
+
+#   ID      - Label to identify hutch, will display as {Sector}-{Type}-{ID}
+#   prefix  - IOC Prefix, can be used in related-display macros 
+#   shutter - BLEPS shutter initialism
+
+    - ID: 'D'
+      prefix: "100idd"
+      #shutter: "SDS"
+        
+      # Related displays that will be linked in IOC name button (OPTIONAL)
+      # Default is:
+      # 
+      # IOC-Links:
+      #      - { label: "IOC Debug", file: "{prefix}_all" }
+        
+      # Set of points to control the displayed beam when shutters are open (OPTIONAL)
+      # Size of canvas is 380x200, with the visual display of optics is centered at y=100
+      # Default is:
+      # 
+      # beam-shape: [ 0x100, 380x100 ]
+        
+      # PSS station ID for displayed beam (OPTIONAL)
+      # Default is:
+      # 
+      # beam-station: "{ID}"
+        
+      # Width, in pixels, of the hutch's section. (OPTIONAL)
+      # Making a section skinnier may require fewer optics slices or related display buttons
+      # Default is:
+      #   
+      # hutch-width: 415
+              
+      buttons:
+            
+    ##################################
+    #  Miscellaneous Linked Screens  #
+    ##################################
+    
+    #   title - Display title for button (max chars 15)
+    #   links - List of displays to link to
+    # 
+    #   Default width of 415px equates to six buttons per hutch
+            
+        - title: "Motors"
+          links:
+            - { label: "CR8-D1 1-8",         file: "topMotors8", macros: "P=100iddSoft:CR8-D1:,M1=m1,M2=m2,M3=m3,M4=m4,M5=m5,M6=m6,M7=m7,M8=m8"}
+            - { label: "CR8-D1 9-16",        file: "topMotors8", macros: "P=100iddSoft:CR8-D1:,M1=m9,M2=m10,M3=m11,M4=m12,M5=m13,M6=m14,M7=m15,M8=m16" }
+            - { label: "Transfocator Move",  file: "motors4x",   macros: "P=100iddSoft:TRANS:,M1=m1,M2=m2,M3=m3,M4=m4"}
+            - { label: "Transfocator Lenses",file: "motors10x",  macros: "P=100iddSoft:TRANS:,M1=m5,M2=m6,M3=m7,M4=m8,M5=m9,M6=m10,M7=m11,M8=m12,M9=m13,M10=m14"}
+            
+            
+        - title: "Scans"
+          links:
+            - { label: "Scan1 (for all scans)",             file: "scan", macros: "P=100iddSoft:,N=1,S=scan1" }
+            - { label: "Scan2 (for 2D &amp; higher scans)", file: "scan", macros: "P=100iddSoft:,N=2,S=scan2" }
+            - { label: "Scan3 (for 3D &amp; higher scans)", file: "scan", macros: "P=100iddSoft:,N=3,S=scan3" }
+            - { label: "Scan4 (for 4D scans)",              file: "scan", macros: "P=100iddSoft:,N=4,S=scan4" }
+            - { label: "ScanH (hardware assisted scans)",   file: "scan", macros: "P=100iddSoft:,N=H,S=scanH" }
+            - { label: "saveData.ui", file: "scan_saveData", macros: "P=100iddSoft" }
+            
+        - title: "Calcs"
+          links:
+            - { label: "user calculation 1", file: "userCalc", macros: "P=100iddSoft:,C=userCalc1" }
+            - { label: "user calculation 2", file: "userCalc", macros: "P=100iddSoft:,C=userCalc2" }
+            - { label: "user calculation 3", file: "userCalc", macros: "P=100iddSoft:,C=userCalc3" }
+            - { label: "user calculation 4", file: "userCalc", macros: "P=100iddSoft:,C=userCalc4" }
+            - { label: "user calculation 5", file: "userCalc", macros: "P=100iddSoft:,C=userCalc5" }
+            - { label: "user calcs 1-10", file: "userCalcs10", macros: "P=100iddSoft:" }
+            
+        - title: "Serial"
+          links: 
+            - {label: "", file: "", macros: ""}
+            
+        - title: ""
+          links: 
+            - {label: "", file: "", macros: ""}
+            
+        - title: ""
+          links: 
+            - {label: "", file: "", macros: ""}

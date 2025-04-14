@@ -1,0 +1,134 @@
+Header: "100-ID-A"
+
+
+############################
+#   Equipment Definitions  #
+############################
+
+# Top level screen will include all hutch files, so use unique names
+
+100IDA_WBSlits_US: &100ida_wbslits_us
+    label: "Upstream (SL-1)"
+    file: "maskApertureSlit"
+    macros: "P=100idaSoft:,SLITS=SL-1,HOR=CR8-A1:m1,DIAG=CR8-A1:m2,PITCH=CR8-A1:m3,YAW=CR8-A1:m4"
+        
+100IDA_WBSlits_DS: &100ida_wbslits_ds
+    label: "Downstream (SL-2)"
+    file: "maskApertureSlit"
+    macros: "P=100idaSoft:,SLITS=SL-2,HOR=CR8-A1:m9,DIAG=CR8-A1:m10,PITCH=CR8-A1:m11,YAW=CR8-A1:m12"
+    
+100IDA_WBSlits: &100ida_wbslits_both
+    links:
+        - *100ida_wbslits_us
+        - *100ida_wbslits_ds
+
+100IDA_Mono: &100ida_mono
+    links:
+        - {label: "Seq Control",  file: "kohzuSeqCtl_All", macros: "P=100idaSoft:"}
+        - {label: "Motors",       file: "motor8x", macros: "P=100idaSoft:MONO:,M1=m1,M2=m2,M3=m3,M4=m4,M5=m5,M6=m6,M7=m7,M8=m8" }
+
+
+#########################################
+#   Information for Top-Level Screen    #
+#########################################
+
+A-Hutch: &AHutch
+
+#   ID      - Label to identify hutch, will display as {Sector}-{Type}-{ID}
+#   prefix  - IOC Prefix, can be used in related-display macros 
+#   shutter - BLEPS shutter initialism
+
+    - ID: 'A'
+      prefix: "100ida"
+      shutter: "FES"
+       
+      # Related displays that will be linked in IOC name button (OPTIONAL)
+      # Default is:
+      # 
+      # IOC-Links:
+      #      - { label: "IOC Debug", file: "{prefix}_all" }
+        
+      # Set of points to control the displayed beam when shutters are open (OPTIONAL)
+      # Size of canvas is 380x200, with the visual display of optics is centered at y=100
+      # Default is:
+      # 
+      # beam-shape: [ 0x100, 380x100 ]
+      beam-shape: [ 15x100, 325x100, 333x80, 395x80 ]
+
+      # PSS station ID for displayed beam (OPTIONAL)
+      # Default is:
+      # 
+      # beam-station: "{ID}"
+        
+      # Width, in pixels, of the hutch's section. (OPTIONAL)
+      # Making a section skinnier may require fewer optics slices or related display buttons
+      # Default is:
+      #   
+      # hutch-width: 415
+
+        
+      buttons:
+            
+    ##################################
+    #  Miscellaneous Linked Screens  #
+    ##################################
+    
+    #   title - Display title for button (max chars 15)
+    #   links - List of displays to link to
+    # 
+    #   Default width of 415px equates to six buttons per hutch
+
+        - title: "Motors"
+          links:
+            - { label: "FMBO 1-8",   file: "topMotors8", macros: "P=100idaSoft:FMBO:,M1=m1,M2=m2,M3=m3,M4=m4,M5=m5,M6=m6,M7=m7,M8=m8" }
+            - { label: "FMBO Piezo", file: "topMotors8", macros: "P=100idaSoft:FMBO:Piezo:,M1=m1,M2=m2,M3=m3,M4=m4,M5=m5,M6=m6,M7=m7,M8=m8" }
+            - { label: "IDT Mono",   file: "topMotors8", macros: "P=100idaSoft:MONO:,M1=m1,M2=m2,M3=m3,M4=m4,M5=m5,M6=m6,M7=m7,M8=m8" }
+            - { label: "CR8-A1",     file: "topMotors8", macros: "P=100idaSoft:CR8-A1:,M1=m1,M2=m2,M3=m3,M4=m4,M5=m5,M6=m6,M7=m7,M8=m8" }
+            - { label: "Soft Motors 1-10",  file: "softMotors10", macros: "P=100idaSoft:,SM1=SM1,SM2=SM2,SM3=SM3,SM4=SM4,SM5=SM5,SM6=SM6,SM7=SM7,SM8=SM8,SM9=SM9,SM10=SM10"}
+            - { label: "Soft Motors 11-20",  file: "softMotors10", macros: "P=100idaSoft:,SM1=SM11,SM2=SM12,SM3=SM13,SM4=SM14,SM5=SM15,SM6=SM16,SM7=SM17,SM8=SM18,SM9=SM19,SM10=SM20"}
+            
+        - title: "Scans"
+          links:
+            - { label: "Scan1 (for all scans)",             file: "scan", macros: "P=100idaSoft:,N=1,S=scan1" }
+            - { label: "Scan2 (for 2D &amp; higher scans)", file: "scan", macros: "P=100idaSoft:,N=2,S=scan2" }
+            - { label: "Scan3 (for 3D &amp; higher scans)", file: "scan", macros: "P=100idaSoft:,N=3,S=scan3" }
+            - { label: "Scan4 (for 4D scans)",              file: "scan", macros: "P=100idaSoft:,N=4,S=scan4" }
+            - { label: "ScanH (hardware assisted scans)",   file: "scan", macros: "P=100idaSoft:,N=H,S=scanH" }
+            - { label: "saveData.ui", file: "scan_saveData", macros: "P=100idaSoft" }
+            
+        - title: "Calcs"
+          links:
+            - { label: "user calculation 1", file: "userCalc", macros: "P=100idaSoft:,C=userCalc1" }
+            - { label: "user calculation 2", file: "userCalc", macros: "P=100idaSoft:,C=userCalc2" }
+            - { label: "user calculation 3", file: "userCalc", macros: "P=100idaSoft:,C=userCalc3" }
+            - { label: "user calculation 4", file: "userCalc", macros: "P=100idaSoft:,C=userCalc4" }
+            - { label: "user calculation 5", file: "userCalc", macros: "P=100idaSoft:,C=userCalc5" }
+            - { label: "user calcs 1-10", file: "userCalcs10", macros: "P=100idaSoft:" }
+            
+        - title: "Serial"
+          links:
+            - { label: "Serial 1", file: "asynOctet", macros: "P=100idaSoft:,R=asyn_1" }
+            - { label: "Serial 2", file: "asynOctet", macros: "P=100idaSoft:,R=asyn_2" }
+            - { label: "Serial 3", file: "asynOctet", macros: "P=100idaSoft:,R=asyn_3" }
+            - { label: "Serial 4", file: "asynOctet", macros: "P=100idaSoft:,R=asyn_4" }
+            - { label: "Serial 5", file: "asynOctet", macros: "P=100idaSoft:,R=asyn_5" }
+            - { label: "Serial 6", file: "asynOctet", macros: "P=100idaSoft:,R=asyn_6" }
+            - { label: "Serial 7", file: "asynOctet", macros: "P=100idaSoft:,R=asyn_7" }
+            - { label: "Serial 8", file: "asynOctet", macros: "P=100idaSoft:,R=asyn_8" }
+            - { label: "Serial 9", file: "asynOctet", macros: "P=100idaSoft:,R=asyn_9" }
+            - { label: "Serial 10", file: "asynOctet", macros: "P=100idaSoft:,R=asyn_10" }
+            - { label: "Serial 11", file: "asynOctet", macros: "P=100idaSoft:,R=asyn_11" }
+            - { label: "Serial 12", file: "asynOctet", macros: "P=100idaSoft:,R=asyn_12" }
+            - { label: "Serial 13", file: "asynOctet", macros: "P=100idaSoft:,R=asyn_13" }
+            - { label: "Serial 14", file: "asynOctet", macros: "P=100idaSoft:,R=asyn_14" }
+            - { label: "Serial 15", file: "asynOctet", macros: "P=100idaSoft:,R=asyn_15" }
+            - { label: "Serial 16", file: "asynOctet", macros: "P=100idaSoft:,R=asyn_16" }
+            
+        - title: ""
+          links: 
+            - {label: "", file: "", macros: ""}
+            
+        - title: ""
+          links: 
+            - {label: "", file: "", macros: ""}
+            

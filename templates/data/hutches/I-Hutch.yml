@@ -1,0 +1,124 @@
+Header: "100-ID-I"
+
+
+############################
+#   Equipment Definitions  #
+############################
+
+# Top level screen will include all hutch files, so use unique names
+
+
+#########################################
+#   Information for Top-Level Screen    #
+#########################################
+
+I-Hutch: &IHutch
+
+#   ID      - Label to identify hutch, will display as {Sector}-{Type}-{ID}
+#   prefix  - IOC Prefix, can be used in related-display macros 
+#   shutter - BLEPS shutter initialism
+
+    - ID: 'I'
+      prefix: "8idi"
+      shutter: "SIS"
+        
+      # Related displays that will be linked in IOC name button (OPTIONAL)
+      # Default is:
+      # 
+      # IOC-Links:
+      #      - { label: "IOC Debug", file: "{prefix}_all" }
+        
+      # Set of points to control the displayed beam when shutters are open (OPTIONAL)
+      # Size of canvas is 380x200, with the visual display of optics is centered at y=100
+      # Default is:
+      # 
+      # beam-shape: [ 0x100, 380x100 ]
+        
+      # PSS station ID for displayed beam (OPTIONAL)
+      # Default is:
+      # 
+      # beam-station: "{ID}"
+        
+      # Width, in pixels, of the hutch's section. (OPTIONAL)
+      # Making a section skinnier may require fewer optics slices or related display buttons
+      # Default is:
+      #   
+      # hutch-width: 415
+        
+          
+      buttons:
+            
+    ##################################
+    #  Miscellaneous Linked Screens  #
+    ##################################
+    
+    #   title - Display title for button (max chars 15)
+    #   links - List of displays to link to
+    # 
+    #   Default width of 415px equates to six buttons per hutch
+
+        - title: "Motors VME"
+          links:
+            - { label: "1-8",   file: "topMotors8", macros: "P={prefix}:,M1=m1,M2=m2,M3=m3,M4=m4,M5=m5,M6=m6,M7=m7,M8=m8" }
+            - { label: "9-16",  file: "topMotors8", macros: "P={prefix}:,M1=m9,M2=m10,M3=m11,M4=m12,M5=m13,M6=m14,M7=m15,M8=m16" }
+            - { label: "17-24", file: "topMotors8", macros: "P={prefix}:,M1=m17,M2=m18,M3=m19,M4=m20,M5=m21,M6=m22,M7=m23,M8=m24" }
+            - { label: "25-32", file: "topMotors8", macros: "P={prefix}:,M1=m25,M2=m26,M3=m27,M4=m28,M5=m29,M6=m30,M7=m31,M8=m32" }
+            - { label: "33-40", file: "topMotors8", macros: "P={prefix}:,M1=m33,M2=m34,M3=m35,M4=m36,M5=m37,M6=m38,M7=m38,M8=m40" }
+            - { label: "41-48", file: "topMotors8", macros: "P={prefix}:,M1=m41,M2=m42,M3=m43,M4=m44,M5=m45,M6=m46,M7=m47,M8=m48" }
+            - { label: "49-56", file: "topMotors8", macros: "P={prefix}:,M1=m49,M2=m50,M3=m51,M4=m52,M5=m53,M6=m54,M7=m55,M8=m56" }
+            - { label: "57-64", file: "topMotors8", macros: "P={prefix}:,M1=m57,M2=m58,M3=m59,M4=m60,M5=m61,M6=m62,M7=m63,M8=m64" }
+            
+        - title: "Scans"
+          links:
+            - { label: "Scan1 (for all scans)",             file: "scan", macros: "P=8idiSoft:,N=1,S=scan1" }
+            - { label: "Scan2 (for 2D &amp; higher scans)", file: "scan", macros: "P=8idiSoft:,N=2,S=scan2" }
+            - { label: "Scan3 (for 3D &amp; higher scans)", file: "scan", macros: "P=8idiSoft:,N=3,S=scan3" }
+            - { label: "Scan4 (for 4D scans)",              file: "scan", macros: "P=8idiSoft:,N=4,S=scan4" }
+            - { label: "ScanH (hardware assisted scans)",   file: "scan", macros: "P=8idiSoft:,N=H,S=scanH" }
+            - { label: "saveData.ui", file: "scan_saveData", macros: "P=8idiSoft" }
+            
+        - title: "Calcs"
+          links:
+            - { label: "user calculation 1", file: "userCalc", macros: "P=8idiSoft:,C=userCalc1" }
+            - { label: "user calculation 2", file: "userCalc", macros: "P=8idiSoft:,C=userCalc2" }
+            - { label: "user calculation 3", file: "userCalc", macros: "P=8idiSoft:,C=userCalc3" }
+            - { label: "user calculation 4", file: "userCalc", macros: "P=8idiSoft:,C=userCalc4" }
+            - { label: "user calculation 5", file: "userCalc", macros: "P=8idiSoft:,C=userCalc5" }
+            - { label: "user calcs 1-10", file: "userCalcs10", macros: "P=8idiSoft:" }
+            
+        - title: "Motors Soft"
+          links: 
+            - {label: "CR8-I2 1-8",    file: "topMotors8", macros: "P=8idiSoft:CR8-I2:,M1=m1,M2=m2,M3=m3,M4=m4,M5=m5,M6=m6,M7=m7,M8=m8" }
+            - {label: "CR8-I2 9-16",   file: "topMotors8", macros: "P=8idiSoft:CR8-I2:,M1=m9,M2=m10,M3=m11,M4=m12,M5=m13,M6=m14,M7=m15,M8=m16"}
+            - {label: "Flight Path",   file: "topMotors8", macros: "P=8idiSoft:FLIGHT:,M1=m1,M2=m2,M3=m3,M4=m4,M5=m5,M6=m6,M7=m7,M8=m8" }
+            - {label: "Aerotech 1-8",  file: "topMotors8", macros: "P=8idiAerotech:,M1=m1,M2=m2,M3=m3,M4=m4,M5=m5,M6=m6,M7=m7,M8=m8" }
+            - {label: "Aerotech 9-16", file: "topMotors8", macros: "P=8idiAerotech:,M1=m9,M2=m10,M3=m11,M4=m12,M5=m13,M6=m14,M7=m15,M8=m16"}
+            - {label: "Sample QNW",    file: "motor6x",    macros: "P=,M1=8idiAerotech:m1,M2=8idiAerotech:m2,M3=8idiAerotech:m3,M4=8ide:m14,M5=8ide:m15,M6=8ide:m16"}
+            - {label: "Detector",      file: "motor2x",    macros: "P=8idiAerotech:,M1=m4,M2=m5"}
+            - {label: "Hexapod",       file: "motor6x",    macros: "P=8idiAerotech:,M1=m7,M2=m8,M3=m9,M4=m10,M5=m11,M6=m12"}
+            - {label: "Profile Move",   file: "8idiProfileMove",   macros: "P=8idiAerotech:,R=pm1:,M1=8idiAerotech:m1,M2=8idiAerotech:m2,M3=8idiAerotech:m3,M4=8idiAerotech:m4,M5=8idiAerotech:m5,M6=8ideAerotech:m1,M7=8ideAerotech:m2,M8=unused,TITLE=8idi_Automation1_profileMove"}
+            
+        - title: "Serial"
+          links: 
+            - { label: "Serial 1", file: "asynOctet", macros: "P=8idiSoft:,R=asyn_1" }
+            - { label: "Serial 2", file: "asynOctet", macros: "P=8idiSoft:,R=asyn_2" }
+            - { label: "Serial 3", file: "asynOctet", macros: "P=8idiSoft:,R=asyn_3" }
+            - { label: "Serial 4", file: "asynOctet", macros: "P=8idiSoft:,R=asyn_4" }
+            - { label: "Serial 5", file: "asynOctet", macros: "P=8idiSoft:,R=asyn_5" }
+            - { label: "Serial 6", file: "asynOctet", macros: "P=8idiSoft:,R=asyn_6" }
+            - { label: "Serial 7", file: "asynOctet", macros: "P=8idiSoft:,R=asyn_7" }
+            - { label: "Serial 8", file: "asynOctet", macros: "P=8idiSoft:,R=asyn_8" }
+            - { label: "Serial 9", file: "asynOctet", macros: "P=8idiSoft:,R=asyn_9" }
+            - { label: "Serial 10", file: "asynOctet", macros: "P=8idiSoft:,R=asyn_10" }
+            - { label: "Serial 11", file: "asynOctet", macros: "P=8idiSoft:,R=asyn_11" }
+            - { label: "Serial 12", file: "asynOctet", macros: "P=8idiSoft:,R=asyn_12" }
+            - { label: "Serial 13", file: "asynOctet", macros: "P=8idiSoft:,R=asyn_13" }
+            - { label: "Serial 14", file: "asynOctet", macros: "P=8idiSoft:,R=asyn_14" }
+            - { label: "Serial 15", file: "asynOctet", macros: "P=8idiSoft:,R=asyn_15" }
+            - { label: "Serial 16", file: "asynOctet", macros: "P=8idiSoft:,R=asyn_16" }
+            
+        - title: "I/O"
+          links: 
+            - {label: "Meascomp CTR-08", file: "USBCTR", macros: "P=8idiSoft:,SP=8idiSoft:,S=scaler1,MP=8idiSoft:MCS01:,Bi=Bi,Li=Li,Bo=Bo,Lo=Lo,Bd=Bd,Ct=Counter,Pg=PulseGen,Tg=Trig"}
+            - {label: "Labjack T7-03", file: "LabJack_T7_BOX", macros: "P=8idiSoft:LJT705:"}
+            
