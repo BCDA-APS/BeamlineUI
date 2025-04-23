@@ -17,24 +17,15 @@ Single_Hutch: !Template:Hutch
     
     - !group
         - !group
-            geometry: "0x25 x {hutch-width}x350"
+            geometry: "0x25 x 0x350"
             
             border-width: 4
             border-color: *grey_darker
             background:   *grey_lighter
             
             children:
-                Beam: !HStretch:Polyline
-                    geometry: 0x16 x 0x200
-                    
-                    border-color: *alarm_red
-                    border-width: 3
-                                        
-                    points: "{beam-shape}"
-                    visibility: "S{Sector:02d}{Type}-PSS:Sta{beam-station}:BeamPresentM"
-                        
                 Hutch_Links: !VAnchor:HCenter:Grid
-                    margins: 0x0x0x15
+                    margins: 21x0x21x15
                     padding: 15
                     max-rows: 2
                     aspect-ratio: 1.5
@@ -53,6 +44,16 @@ Single_Hutch: !Template:Hutch
                     repeat-over: "optics"
                     padding: 9
                     children: [ !Apply:OPS_Slice ]
+                    
+                Beam: !HStretch:Polyline
+                    z-order: -1
+                    geometry: 0x16 x 0x200
+                    
+                    border-color: *alarm_red
+                    border-width: 3
+                                        
+                    points: "{beam-shape}"
+                    visibility: "S{Sector:02d}{Type}-PSS:Sta{beam-station}:BeamPresentM"
                         
                 Additional_Image: !If:hutch-img
                     - !Image { geometry: "{image-x} x {image-y} x 90x25", file: "{hutch-img}" }
@@ -89,17 +90,13 @@ Hutches: !hrepeat
     children: [ !Apply:Hutch ]
 
                 
-Ops: !hcenter:hflow
+Ops: !HCenter:HFlow
     geometry: 0x50 x 0x0    
     padding: 5
     
     children:
         - !Apply:OPS_Ring
-        - !Apply:OPS_Undulator
-            Undulators:
-                - "US"
-                - "DS"
-                
+        - !Apply:OPS_Undulator    
         - !Apply:OPS_BPM
         - !Apply:OPS_Shutter                
                     
