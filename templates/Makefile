@@ -23,6 +23,5 @@ SCREENS += 100idi_all.ui
 SCREENS += 100id.ui
 100id_TEMPLATE = beamline.yml
 100id_INPUT = data/100id.yml
-100id_DEPENDS = widgets/ops-panels.yml widgets/ops-slice.yml
 
 include $(TOP)/configure/RULES_YML2UI
