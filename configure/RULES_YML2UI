@@ -1,6 +1,6 @@
 GESTALT = /APSshare/bin/gestalt
 
-.PHONY: all rebuild $(DIRS)
+.PHONY: all rebuild $(DIRS) FORCE
 
 all: $(addprefix $(INSTALL_DIR)/,$(SCREENS)) $(DIRS)
 
@@ -10,6 +10,7 @@ all: $(addprefix $(INSTALL_DIR)/,$(SCREENS)) $(DIRS)
 rebuild:
 	@$(MAKE) -B
 
+# Recurse into each listed subdirectory
 $(DIRS):
 	@$(MAKE) -C $@
 
@@ -33,7 +34,7 @@ $(1)-REQUIRE   := $$(if $$(filter $$($$($(1)-FILE_BASE)_TYPE),str),\
                       $$($(1)-TEMPLATE) $$($$($(1)-FILE_BASE)_INPUT))
 
 # Generate dependencies, if changed
-.depends/$(1).d: | .depends
+.depends/$(1).d: FORCE
 	@tmp=$$$$(mktemp); \
 	$(GESTALT) --depends \
 	    $$(if $$(filter --from str,$$($(1)-DATATYPE)),,$$($(1)-DATA)) \
@@ -41,6 +42,7 @@ $(1)-REQUIRE   := $$(if $$(filter $$($$($(1)-FILE_BASE)_TYPE),str),\
 	    | sed 's|^|$(INSTALL_DIR)/$(1): |' > $$$$tmp; \
 	if ! cmp -s $$$$tmp $$@; then \
 	    mv $$$$tmp $$@; \
+	    chmod a+w $$@; \
 	else \
 	    rm $$$$tmp; \
 	fi
@@ -52,6 +54,10 @@ endef
 
 # Expand the rule template for every screen in the SCREENS list
 $(foreach i,$(SCREENS),$(eval $(call MY_RULE,$(i))))
+
+
+# Used to force the depencies to always be checked
+FORCE: ;
 
 # Grab generated dependencies
 -include $(wildcard .depends/*.d)
